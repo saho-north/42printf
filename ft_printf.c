@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:39 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/09 17:43:25 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/10 01:01:30 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_printf(const char *fmt, ...)
 
 	char c, *s;
 	va_start(ap, fmt);
-	va_copy(ap2, ap);
+	//va_copy(ap2, ap);
 	while (*fmt)
 		switch (*fmt++)
 		{
