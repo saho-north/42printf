@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:33:21 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/22 02:57:33 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/22 03:38:34 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define IS_UPPER true
-# define IS_LOWER false
+# define IS_UPPER 1
+# define IS_LOWER 0
 
 int		ft_printf(const char *format, ...);
 ssize_t	ft_putchar_fd_count(char c, int fd);
