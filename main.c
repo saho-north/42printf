@@ -23,7 +23,7 @@ int	main(void)
 
 	ch = 'A';
 	str = "Hello, world!";
-	num = -42;
+	num = 0;
 	u_num = 424242;
 	ptr = &num;
 	// Basic test cases
