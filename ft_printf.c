@@ -6,13 +6,13 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 02:30:14 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/22 03:02:06 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/22 04:06:17 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static ssize_t	format(const char specifier, va_list *ap)
+static ssize_t	format_specifier(const char specifier, va_list *ap)
 {
 	if (specifier == 'c')
 		return (ft_putchar_fd_count(va_arg(*ap, int), 1));
@@ -23,7 +23,8 @@ static ssize_t	format(const char specifier, va_list *ap)
 	else if (specifier == 'd' || specifier == 'i')
 		return (ft_putnbr_fd_base_count(va_arg(*ap, int), "0123456789", 1));
 	else if (specifier == 'u')
-		return (ft_putnbr_fd_bc_ul(va_arg(*ap, unsigned int), "0123456789", 1));
+		return (ft_putnbr_ul_base_count(va_arg(*ap, unsigned int), "0123456789",
+				1));
 	else if (specifier == 'x')
 		return (ft_puthex_fd_count(va_arg(*ap, unsigned int), 1, IS_LOWER));
 	else if (specifier == 'X')
@@ -47,7 +48,7 @@ int	ft_printf(const char *fmt, ...)
 		if (*fmt == '%')
 		{
 			fmt++;
-			check_res = format(*fmt, &ap);
+			check_res = format_specifier(*fmt, &ap);
 		}
 		else
 			check_res = ft_putchar_fd_count(*fmt, 1);
