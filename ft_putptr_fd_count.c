@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 21:48:40 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/22 02:57:33 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/22 03:32:51 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ssize_t	ft_putptr_fd_count(void *ptr, int fd)
 	ssize_t	ret;
 
 	if (!ptr)
-		return (ft_putstr_fd_count("(nil)", fd));
+		return (ft_putstr_fd_count("0x0", fd));
 	ret = ft_putstr_fd_count("0x", fd);
 	if (ret < 0)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:32:57 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/22 03:07:08 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/22 03:14:28 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int	main(void)
 	printf("printf   : %x\n", num);
 	ft_printf("ft_printf: %X\n", num); // uppercase hex
 	printf("printf   : %X\n", num);
+	ft_printf("ft_printf: %p %p\n", (void *)0, (void *)0);
+	printf("printf   : %p %p\n", (void *)0, (void *)0);
 	return (0);
 }
