@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:32:57 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/09 16:16:43 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/22 02:01:51 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 int	main(void)
 {
-	int		num;
-	char	ch;
-	char	*str;
+	char			ch;
+	char			*str;
+	int				num;
+	unsigned int	u_num;
 
-	num = 42;
 	ch = 'A';
 	str = "Hello, world!";
-	// ft_printfの出力と標準のprintfの出力を比較する
-	ft_printf("ft_printf: %d %c %s\n", num, ch, str);
-	printf("   printf: %d %c %s\n", num, ch, str);
+	num = -42;
+	u_num = 424242;
+	ft_printf("ft_printf: %c %s %d %u\n", ch, str, num, u_num);
+	printf("printf   : %c %s %d %u\n", ch, str, num, u_num);
+	// ft_printf("ft_printf: %d %p %s\n", num, (void *)&num, str);
+	// printf("printf   : %d %p %s\n", num, (void *)&num, str);
 	return (0);
 }

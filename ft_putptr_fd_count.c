@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putptr_fd_count.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 12:28:08 by Saho Kitaha       #+#    #+#             */
-/*   Updated: 2023/06/22 02:05:21 by sakitaha         ###   ########.fr       */
+/*   Created: 2023/06/21 21:48:40 by sakitaha          #+#    #+#             */
+/*   Updated: 2023/06/22 00:24:24 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+ssize_t	ft_putptr_fd_count(void *ptr, int fd)
 {
-	size_t	i;
+	ssize_t	ret;
 
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (!ptr)
+		return (ft_putstr_fd_count("(nil)", fd));
+	ret = ft_putstr_fd_count("0x", fd);
+	if (ret < 0)
+		return (-1);
+	ret = ft_putnbr_fd_bc_unsigned((unsigned long)ptr, "0123456789abcdef", fd);
+	if (ret < 0)
+		return (-1);
+	return (ret + 2);
 }

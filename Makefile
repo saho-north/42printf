@@ -1,15 +1,21 @@
+NAME	= libftprintf.a
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -I.
 DEBUG	= -fsanitize=address -g
 AR		= ar
 ARFLAGS = rc
-NAME	= libftprintf.a
-SRCS	= *.c
+SRCS	= ft_printf.c \
+		ft_putchar_fd_count.c \
+		ft_putnbr_fd_base_count.c \
+		ft_putptr_fd_count.c \
+		ft_putstr_fd_count.c \
+		ft_strlen.c
 OBJS 	= $(SRCS:.c=.o)
-INCS	= *.h
-BONUS_SRCS	= test_bonus.c
+INCS	= ft_printf.h
+BONUS_SRCS	= ft_printf_bonus.c
 BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
-BONUS_INCS	=
+BONUS_INCS	= ft_printf_bonus.h
+
 ALL_OBJS 	= $(OBJS)
 ifdef ADD
 ALL_OBJS	+= $(BONUS_OBJS)
@@ -34,7 +40,8 @@ re: fclean all
 bonus: $(BONUS_OBJS)
 	make ADD=1
 
-test: $(NAME)
-	$(CC) $(CFLAGS) $(DEBUG) main.c -L. -lftprintf -o test_executable
+test: $(OBJS)
+	$(CC) $(CFLAGS) $(DEBUG) main.c $^ -o test_executable
+	./test_executable
 
 .PHONY: all clean fclean re bonus test

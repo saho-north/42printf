@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ************************************************************************* */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
@@ -6,62 +6,93 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:39 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/10 10:08:24 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:18:56 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	select_format(char *fmt, va_list ap)
+/*
+#
+「別の形式」に変換する時に使う。その機能は、変換指定子によって変わってくる。
+oi換では、先頭に0を追加する。
+x、X変換では、値が0でない時には、先頭に0xまたは0Xを追加する。
+
+%[フラグ][最小フィールド幅].[精度][長さ修飾子][変換指定子]
+cspdiuxX%
+*/
+
+static ssize_t	format(const char *fmt, va_list ap)
 {
 	if (*fmt == 'c')
-		print_char(va_arg(ap, int));
+	{
+		return (ft_putchar_fd_count(va_arg(ap, int), 1));
+	}
 	else if (*fmt == 's')
-		print_string(va_arg(ap, char *));
+	{
+		return (ft_putstr_fd_count(va_arg(ap, char *), 1));
+	}
 	else if (*fmt == 'p')
-		print_pointer(va_arg(ap, void *));
-	else if (*fmt == 'd')
-		print_int(va_arg(ap, int));
-	else if (*fmt == 'i')
-		print_int(va_arg(ap, int));
+	{
+		return (ft_putptr_fd_count(va_arg(ap, void *), 1));
+	}
+	else if (*fmt == 'd' || *fmt == 'i')
+	{
+		return (ft_putnbr_fd_base_count(va_arg(ap, int), "0123456789", 1));
+	}
 	else if (*fmt == 'u')
-		print_unsigned_int(va_arg(ap, unsigned int));
+	{
+		return (ft_putnbr_fd_bc_unsigned(va_arg(ap, unsigned int), "0123456789",
+				1));
+	}
 	else if (*fmt == 'x')
-		print_hex(va_arg(ap, unsigned int));
+	{
+		return (ft_putnbr_fd_bc_unsigned(va_arg(ap, unsigned int),
+											"0123456789abcdef",
+											1));
+	}
 	else if (*fmt == 'X')
-		print_hex_upper(va_arg(ap, unsigned int));
+	{
+		return (ft_putnbr_fd_bc_unsigned(va_arg(ap, unsigned int),
+											"0123456789ABCDEF",
+											1));
+	}
 	else if (*fmt == '%')
-		print_char('%');
+	{
+		return (ft_putchar_fd_count('%', 1));
+	}
+	else
+	{
+		return (ERROR);
+	}
 }
 
 int	ft_printf(const char *fmt, ...)
 {
-	int		printed_len;
-	int		d;
 	va_list	ap;
+	ssize_t	printed_len;
+	ssize_t	check_res;
 
-	char c, *s;
+	printed_len = 0;
 	va_start(ap, fmt);
 	while (*fmt)
 	{
-	}
-	switch (*fmt++)
-	{
-	case 's': /* string */
-		s = va_arg(ap, char *);
-		printf("string %s\n", s);
-		break ;
-	case 'd': /* int */
-		d = va_arg(ap, int);
-		printf("int %d\n", d);
-		break ;
-	case 'c': /* char */
-		/* Note: char is promoted to int. */
-		c = va_arg(ap, int);
-		printf("char %c\n", c);
-		break ;
+		if (*fmt == '%')
+		{
+			fmt++;
+			if (*fmt == '\0')
+				return (ERROR);
+			check_res = format(fmt, ap);
+		}
+		else
+		{
+			check_res = ft_putchar_fd_count(*fmt, 1);
+		}
+		if (check_res < 0)
+			return (-1);
+		printed_len += check_res;
+		fmt++;
 	}
 	va_end(ap);
-	/* use ap2 to iterate over the arguments again */
-	va_end(ap2);
+	return ((int)printed_len);
 }
