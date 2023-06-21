@@ -6,6 +6,7 @@ AR		= ar
 ARFLAGS = rc
 SRCS	= ft_printf.c \
 		ft_putchar_fd_count.c \
+		ft_puthex_fd_count.c \
 		ft_putnbr_fd_base_count.c \
 		ft_putptr_fd_count.c \
 		ft_putstr_fd_count.c \

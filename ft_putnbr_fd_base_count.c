@@ -6,13 +6,13 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 00:55:30 by sakitaha          #+#    #+#             */
-/*   Updated: 2023/06/22 00:18:20 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/06/22 02:57:33 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-ssize_t	ft_putnbr_fd_bc_unsigned(unsigned long num, const char *base, int fd)
+ssize_t	ft_putnbr_fd_bc_ul(unsigned long num, const char *base, int fd)
 {
 	ssize_t	ret;
 	size_t	base_size;
@@ -28,7 +28,7 @@ ssize_t	ft_putnbr_fd_bc_unsigned(unsigned long num, const char *base, int fd)
 			return (-1);
 		return (1);
 	}
-	ret = ft_putnbr_fd_bc_unsigned(num / base_size, base, fd);
+	ret = ft_putnbr_fd_bc_ul(num / base_size, base, fd);
 	if (ret < 0)
 		return (-1);
 	c = base[num % base_size];
@@ -56,7 +56,7 @@ ssize_t	ft_putnbr_fd_base_count(int n, const char *base, int fd)
 		num = (unsigned long)n;
 		is_minus = false;
 	}
-	ret = ft_putnbr_fd_bc_unsigned(num, base, fd);
+	ret = ft_putnbr_fd_bc_ul(num, base, fd);
 	if (ret < 0)
 		return (-1);
 	if (is_minus)
