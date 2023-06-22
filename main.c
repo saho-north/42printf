@@ -24,7 +24,7 @@ int	main(void)
 	ch = 'A';
 	str = "Hello, world!";
 	num = 0;
-	u_num = 424242;
+	u_num = 42424242;
 	ptr = &num;
 	// Basic test cases
 	ft_printf("ft_printf: %c %s %d %u\n", ch, str, num, u_num);
