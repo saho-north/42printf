@@ -5,24 +5,16 @@ DEBUG	= -fsanitize=address -g
 AR		= ar
 ARFLAGS = rc
 SRCS	= ft_printf.c \
-		ft_putchar_fd_count.c \
-		ft_puthex_fd_count.c \
-		ft_putnbr_fd_base_count.c \
-		ft_putptr_fd_count.c \
-		ft_putstr_fd_count.c \
+		ft_putchar_count.c \
+		ft_puthex_count.c \
+		ft_putnbr_base_count.c \
+		ft_putptr_count.c \
+		ft_putstr_count.c \
 		ft_strlen.c
 OBJS 	= $(SRCS:.c=.o)
 INCS	= ft_printf.h
-BONUS_SRCS	= ft_printf_bonus.c
-BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
-BONUS_INCS	= ft_printf_bonus.h
 
-ALL_OBJS 	= $(OBJS)
-ifdef ADD
-ALL_OBJS	+= $(BONUS_OBJS)
-endif
-
-$(NAME): $(ALL_OBJS)
+$(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
 all: $(NAME)
@@ -38,11 +30,10 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(BONUS_OBJS)
-	make ADD=1
-
 test: $(OBJS)
 	$(CC) $(CFLAGS) $(DEBUG) main.c $^ -o test_executable
 	./test_executable
+	make clean
+	rm -rf test_executable test_executable.dSYM
 
-.PHONY: all clean fclean re bonus test
+.PHONY: all clean fclean re test
