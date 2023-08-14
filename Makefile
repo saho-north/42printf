@@ -19,11 +19,11 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c $(INCS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
